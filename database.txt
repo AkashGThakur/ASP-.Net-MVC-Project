@@ -1,0 +1,35 @@
+Database name is cdac
+
+----------create table code--------------------
+CREATE TABLE [dbo].[Products] (
+    [ProductId]    INT             NOT NULL,
+    [ProductName]  VARCHAR (50)    NULL,
+    [Rate]         DECIMAL (18, 2) NULL,
+    [Description]  VARCHAR (200)   NULL,
+    [CategoryName] VARCHAR (50)    NULL,
+    PRIMARY KEY CLUSTERED ([ProductId] ASC)
+);
+
+---------stored procedures code--------------
+CREATE PROCEDURE [dbo].GetAllProducts
+
+AS
+	SELECT * from Products;
+RETURN 0
+-----------------------------------------
+
+CREATE PROCEDURE [dbo].GetOneProduct
+	@ProductId int
+AS
+	SELECT * from Products where ProductId = @ProductId;
+RETURN 0
+------------------------------------------
+CREATE PROCEDURE [dbo].UpdateProduct
+	@ProductId int,
+	@ProductName varchar(50),
+	@Rate decimal(18,2),
+	@Description varchar(200),
+	@CategoryName varchar(50)
+AS
+	update Products set ProductName = @ProductName, Rate = @Rate, Description = @Description, CategoryName = @CategoryName where ProductId = @ProductId;
+RETURN 0
